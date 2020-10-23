@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.launchcode.javawebdevtechjobsmvc.models.JobData;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -22,13 +23,13 @@ public class ListController {
     static HashMap<String, Object> tableChoices = new HashMap<>();
 
     public ListController () {
-        columnChoices.put("all", "All");
+        columnChoices.put("all", "All Jobs");
         columnChoices.put("employer", "Employer");
         columnChoices.put("location", "Location");
         columnChoices.put("positionType", "Position Type");
         columnChoices.put("coreCompetency", "Skill");
 
-        tableChoices.put("all", "all");
+        tableChoices.put("all", "All Jobs");
         tableChoices.put("employer", JobData.getAllEmployers());
         tableChoices.put("location", JobData.getAllLocations());
         tableChoices.put("positionType", JobData.getAllPositionTypes());
@@ -37,8 +38,10 @@ public class ListController {
 
     @RequestMapping(value = "")
     public String list(Model model) {
+
         model.addAttribute("columns", columnChoices);
         model.addAttribute("tableChoices", tableChoices);
+        model.addAttribute("all", "All Jobs");
         model.addAttribute("employers", JobData.getAllEmployers());
         model.addAttribute("locations", JobData.getAllLocations());
         model.addAttribute("positions", JobData.getAllPositionTypes());
